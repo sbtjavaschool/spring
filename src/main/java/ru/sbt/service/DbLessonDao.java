@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllowRemoteAccess
 public class DbLessonDao implements LessonDao {
     private final String host;
     private final int port;
@@ -23,5 +24,10 @@ public class DbLessonDao implements LessonDao {
         this.connectionPoolSize = connectionPoolSize;
         this.username = username;
         this.password = password;
+    }
+
+    @Override
+    public void update(Object o) {
+
     }
 }

@@ -24,4 +24,9 @@ public class DbPersonDao implements PersonDao {
         this.username = username;
         this.password = password;
     }
+
+    @Override
+    public void save(int i) {
+
+    }
 }

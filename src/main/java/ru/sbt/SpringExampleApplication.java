@@ -9,14 +9,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.retry.annotation.EnableRetry;
 import ru.sbt.service.ScheduleService;
 
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-//@ImportResource({"classpath*:config.xml"})
+@ImportResource({"classpath*:config.xml", "classpath*:prod-config.xml"})
 @PropertySource("secret.properties")
 @ComponentScan("ru.sbt")
+@EnableRetry
 public class SpringExampleApplication {
     private final ScheduleService service;
 
@@ -27,7 +29,7 @@ public class SpringExampleApplication {
 
     @PostConstruct
     public void onStartup() {
-        service.calc();
+//        service.calc();
     }
 
     public static void main(String[] args) {

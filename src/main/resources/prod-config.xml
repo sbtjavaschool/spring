@@ -2,8 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
-       profile="dev">
+       profile="prod">
 
+    <bean id="scheduleService" class="ru.sbt.service.ScheduleServiceImpl">
+        <constructor-arg name="lessonDao" ref="lessonDao"/>
+        <constructor-arg name="personDao" ref="personDao"/>
+    </bean>
 
     <bean id="mockScheduleService" class="ru.sbt.service.ScheduleServiceImpl">
         <constructor-arg name="lessonDao" ref="lessonDao"/>
@@ -12,16 +16,13 @@
 
     <bean id="mockPersonDao" class="ru.sbt.service.MockPersonDao"/>
 
-    <bean id="lessonDao" class="ru.sbt.service.DbLessonDao" parent="commonDao">
-        <constructor-arg name="host" value="190.1.2.3"/>
-    </bean>
 
     <bean id="personDao" class="ru.sbt.service.DbPersonDao" parent="commonDao">
     </bean>
 
     <bean id="commonDao" abstract="true">
         <constructor-arg name="host" value="localhost"/>
-        <constructor-arg name="port" value="9000"/>
+        <constructor-arg name="port" value="800"/>
         <constructor-arg name="connectionPoolSize" value="${lessons.db.connectionPoolSize}"/>
         <constructor-arg name="username" value="${db.username}"/>
         <constructor-arg name="password" value="${db.password}"/>
